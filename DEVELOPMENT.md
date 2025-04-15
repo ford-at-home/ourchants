@@ -48,19 +48,88 @@ CREATE INDEX idx_songs_name ON songs(name);
 CREATE INDEX idx_songs_album ON songs(album);
 ```
 
+##### Database Operations Module
+The `src/database/operations.py` module provides a comprehensive set of CRUD operations for managing song data:
+
+###### Song Data Class
+```python
+@dataclass
+class Song:
+    id: str
+    name: str
+    artist: str
+    album: str
+    release_date: date
+    genre: str
+    duration_in_seconds: int
+    created_at: datetime = None
+    updated_at: datetime = None
+```
+
+###### Key Features
+1. **Connection Management**
+   - Secure credential handling
+   - Environment-based configuration
+   - Connection pooling
+   - Error handling
+
+2. **CRUD Operations**
+   - `create_song()`: Create new songs with validation
+   - `get_song()`: Retrieve songs by ID
+   - `update_song()`: Update song information
+   - `delete_song()`: Remove songs
+   - `list_songs()`: List songs with filtering and pagination
+
+3. **Data Validation**
+   - Required field checking
+   - Type validation
+   - Duration validation
+   - Data integrity checks
+
+4. **Error Handling**
+   - `DatabaseError`: Base exception
+   - `SongNotFoundError`: For missing songs
+   - `InvalidDataError`: For invalid input
+
+###### Example Usage
+```python
+# Create a new song
+song_data = {
+    'id': 'song-1',
+    'name': 'Sacred Chant',
+    'artist': 'Traditional',
+    'album': 'Ancient Melodies',
+    'release_date': date(2023, 1, 1),
+    'genre': 'Sacred',
+    'duration_in_seconds': 180
+}
+song = create_song(song_data)
+
+# Update a song
+updated_song = update_song('song-1', {'name': 'Updated Name'})
+
+# Get a song
+song = get_song('song-1')
+
+# List songs
+songs = list_songs(genre='Sacred', limit=10)
+```
+
 ##### Test Suite
-The test suite (`tests/test_database_queries.py`) verifies:
+The test suite (`tests/test_database_operations.py`) verifies:
 - Basic CRUD operations
 - Data type integrity
 - Filtering capabilities
 - Statistical calculations
 - Connection management
+- Error handling
 
 Key test cases:
-1. `test_query_all_songs`: Verifies complete data structure
-2. `test_query_by_genre`: Tests genre-based filtering
-3. `test_query_by_artist`: Tests artist-based filtering
-4. `test_query_song_duration`: Tests aggregate calculations
+1. `test_create_song`: Verifies song creation with validation
+2. `test_get_song`: Tests song retrieval and error handling
+3. `test_update_song`: Tests update operations and validation
+4. `test_delete_song`: Tests deletion and existence checking
+5. `test_list_songs`: Tests filtering and pagination
 
 ### Phase 4: API Layer (Planned)
 1. RESTful API implementation
@@ -87,6 +156,8 @@ Key test cases:
 - Optimized schema design
 - Comprehensive indexing
 - Data validation rules
+- Connection management
+- Error handling
 
 ### Infrastructure
 - AWS RDS for database
@@ -99,6 +170,7 @@ Key test cases:
 - Integration tests for database operations
 - Data validation tests
 - Performance testing
+- Error scenario testing
 
 ## Development Guidelines
 
@@ -107,18 +179,23 @@ Key test cases:
 2. Type hints and validation
 3. Error handling
 4. Resource management
+5. Test coverage
+6. Code organization
 
 ### Testing Requirements
 1. Unit test coverage
 2. Data validation
 3. Connection management
 4. Performance considerations
+5. Error scenario testing
 
 ### Deployment Process
 1. Environment setup
 2. Database provisioning
 3. Schema deployment
 4. Data loading
+5. Testing
+6. Monitoring
 
 ## Project Significance
 
