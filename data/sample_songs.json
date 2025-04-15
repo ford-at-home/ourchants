@@ -1,0 +1,94 @@
+{
+    "songs": [
+        {
+            "id": "SONG001",
+            "name": "Midnight Dreams",
+            "artist": "Luna Eclipse",
+            "album": "Starlight Serenade",
+            "release_date": "2023-03-15",
+            "genre": "Electronic",
+            "duration_in_seconds": 245
+        },
+        {
+            "id": "SONG002",
+            "name": "Ocean Waves",
+            "artist": "Coastal Breeze",
+            "album": "Summer Vibes",
+            "release_date": "2022-06-20",
+            "genre": "Pop",
+            "duration_in_seconds": 198
+        },
+        {
+            "id": "SONG003",
+            "name": "Mountain High",
+            "artist": "Peak Performance",
+            "album": "Altitude",
+            "release_date": "2021-09-05",
+            "genre": "Rock",
+            "duration_in_seconds": 312
+        },
+        {
+            "id": "SONG004",
+            "name": "City Lights",
+            "artist": "Urban Pulse",
+            "album": "Metropolis",
+            "release_date": "2023-11-12",
+            "genre": "Hip Hop",
+            "duration_in_seconds": 267
+        },
+        {
+            "id": "SONG005",
+            "name": "Desert Wind",
+            "artist": "Sahara Sound",
+            "album": "Dunes",
+            "release_date": "2022-02-28",
+            "genre": "World",
+            "duration_in_seconds": 289
+        },
+        {
+            "id": "SONG006",
+            "name": "Rainy Day",
+            "artist": "Storm Chasers",
+            "album": "Weather Patterns",
+            "release_date": "2023-07-08",
+            "genre": "Indie",
+            "duration_in_seconds": 223
+        },
+        {
+            "id": "SONG007",
+            "name": "Sunset Boulevard",
+            "artist": "Golden Hour",
+            "album": "Twilight",
+            "release_date": "2022-12-15",
+            "genre": "Jazz",
+            "duration_in_seconds": 276
+        },
+        {
+            "id": "SONG008",
+            "name": "Forest Echo",
+            "artist": "Wild Harmony",
+            "album": "Nature's Call",
+            "release_date": "2021-05-22",
+            "genre": "Folk",
+            "duration_in_seconds": 234
+        },
+        {
+            "id": "SONG009",
+            "name": "Space Odyssey",
+            "artist": "Cosmic Voyage",
+            "album": "Galaxy",
+            "release_date": "2023-09-30",
+            "genre": "Electronic",
+            "duration_in_seconds": 301
+        },
+        {
+            "id": "SONG010",
+            "name": "River Flow",
+            "artist": "Current Affairs",
+            "album": "Waterways",
+            "release_date": "2022-04-17",
+            "genre": "Ambient",
+            "duration_in_seconds": 287
+        }
+    ]
+} 
