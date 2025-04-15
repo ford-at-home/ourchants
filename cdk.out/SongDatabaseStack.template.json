@@ -1,0 +1,1004 @@
+{
+ "Resources": {
+  "SongDatabaseVPCA08D5546": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "SongDatabaseStack/SongDatabaseVPC"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/Resource"
+   }
+  },
+  "SongDatabaseVPCPublicSubnet1SubnetF2737E3C": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "SongDatabaseVPCA08D5546"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet1/Subnet"
+   }
+  },
+  "SongDatabaseVPCPublicSubnet1RouteTableBA78C708": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "SongDatabaseVPCA08D5546"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet1/RouteTable"
+   }
+  },
+  "SongDatabaseVPCPublicSubnet1RouteTableAssociationF0723ED8": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "SongDatabaseVPCPublicSubnet1RouteTableBA78C708"
+    },
+    "SubnetId": {
+     "Ref": "SongDatabaseVPCPublicSubnet1SubnetF2737E3C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "SongDatabaseVPCPublicSubnet1DefaultRoute5B4ECA61": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "SongDatabaseVPCIGW2263AC93"
+    },
+    "RouteTableId": {
+     "Ref": "SongDatabaseVPCPublicSubnet1RouteTableBA78C708"
+    }
+   },
+   "DependsOn": [
+    "SongDatabaseVPCVPCGW177641E4"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "SongDatabaseVPCPublicSubnet1EIPCA9DD28D": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet1/EIP"
+   }
+  },
+  "SongDatabaseVPCPublicSubnet1NATGateway8B38A0EC": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "SongDatabaseVPCPublicSubnet1EIPCA9DD28D",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "SongDatabaseVPCPublicSubnet1SubnetF2737E3C"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "SongDatabaseVPCPublicSubnet1DefaultRoute5B4ECA61",
+    "SongDatabaseVPCPublicSubnet1RouteTableAssociationF0723ED8"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet1/NATGateway"
+   }
+  },
+  "SongDatabaseVPCPublicSubnet2Subnet7AF432F5": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "SongDatabaseVPCA08D5546"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet2/Subnet"
+   }
+  },
+  "SongDatabaseVPCPublicSubnet2RouteTable24C0782F": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "SongDatabaseVPCA08D5546"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet2/RouteTable"
+   }
+  },
+  "SongDatabaseVPCPublicSubnet2RouteTableAssociation7B718A2B": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "SongDatabaseVPCPublicSubnet2RouteTable24C0782F"
+    },
+    "SubnetId": {
+     "Ref": "SongDatabaseVPCPublicSubnet2Subnet7AF432F5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "SongDatabaseVPCPublicSubnet2DefaultRoute1E7C4093": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "SongDatabaseVPCIGW2263AC93"
+    },
+    "RouteTableId": {
+     "Ref": "SongDatabaseVPCPublicSubnet2RouteTable24C0782F"
+    }
+   },
+   "DependsOn": [
+    "SongDatabaseVPCVPCGW177641E4"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "SongDatabaseVPCPublicSubnet2EIPF62A2BDC": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet2/EIP"
+   }
+  },
+  "SongDatabaseVPCPublicSubnet2NATGateway826B9FE6": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "SongDatabaseVPCPublicSubnet2EIPF62A2BDC",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "SongDatabaseVPCPublicSubnet2Subnet7AF432F5"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "SongDatabaseVPCPublicSubnet2DefaultRoute1E7C4093",
+    "SongDatabaseVPCPublicSubnet2RouteTableAssociation7B718A2B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PublicSubnet2/NATGateway"
+   }
+  },
+  "SongDatabaseVPCPrivateSubnet1SubnetA70560B1": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "SongDatabaseStack/SongDatabaseVPC/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "SongDatabaseVPCA08D5546"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PrivateSubnet1/Subnet"
+   }
+  },
+  "SongDatabaseVPCPrivateSubnet1RouteTableCDEF84D6": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "SongDatabaseStack/SongDatabaseVPC/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "SongDatabaseVPCA08D5546"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PrivateSubnet1/RouteTable"
+   }
+  },
+  "SongDatabaseVPCPrivateSubnet1RouteTableAssociationD2DA70CE": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "SongDatabaseVPCPrivateSubnet1RouteTableCDEF84D6"
+    },
+    "SubnetId": {
+     "Ref": "SongDatabaseVPCPrivateSubnet1SubnetA70560B1"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "SongDatabaseVPCPrivateSubnet1DefaultRoute0F269240": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "SongDatabaseVPCPublicSubnet1NATGateway8B38A0EC"
+    },
+    "RouteTableId": {
+     "Ref": "SongDatabaseVPCPrivateSubnet1RouteTableCDEF84D6"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PrivateSubnet1/DefaultRoute"
+   }
+  },
+  "SongDatabaseVPCPrivateSubnet2SubnetE9127863": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "SongDatabaseStack/SongDatabaseVPC/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "SongDatabaseVPCA08D5546"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PrivateSubnet2/Subnet"
+   }
+  },
+  "SongDatabaseVPCPrivateSubnet2RouteTableA79F662A": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "SongDatabaseStack/SongDatabaseVPC/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "SongDatabaseVPCA08D5546"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PrivateSubnet2/RouteTable"
+   }
+  },
+  "SongDatabaseVPCPrivateSubnet2RouteTableAssociationC12A8764": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "SongDatabaseVPCPrivateSubnet2RouteTableA79F662A"
+    },
+    "SubnetId": {
+     "Ref": "SongDatabaseVPCPrivateSubnet2SubnetE9127863"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "SongDatabaseVPCPrivateSubnet2DefaultRoute3CAC5805": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "SongDatabaseVPCPublicSubnet2NATGateway826B9FE6"
+    },
+    "RouteTableId": {
+     "Ref": "SongDatabaseVPCPrivateSubnet2RouteTableA79F662A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/PrivateSubnet2/DefaultRoute"
+   }
+  },
+  "SongDatabaseVPCIGW2263AC93": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "SongDatabaseStack/SongDatabaseVPC"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/IGW"
+   }
+  },
+  "SongDatabaseVPCVPCGW177641E4": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "SongDatabaseVPCIGW2263AC93"
+    },
+    "VpcId": {
+     "Ref": "SongDatabaseVPCA08D5546"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabaseVPC/VPCGW"
+   }
+  },
+  "DatabaseSecurityGroup7319C0F6": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Security group for song database",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow PostgreSQL access",
+      "FromPort": 5432,
+      "IpProtocol": "tcp",
+      "ToPort": 5432
+     }
+    ],
+    "VpcId": {
+     "Ref": "SongDatabaseVPCA08D5546"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/DatabaseSecurityGroup/Resource"
+   }
+  },
+  "DatabasePassword49A8070F": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "Description": "Password for the song database",
+    "GenerateSecretString": {
+     "ExcludeCharacters": "\"@/\\",
+     "GenerateStringKey": "password",
+     "PasswordLength": 16,
+     "SecretStringTemplate": "{\"username\": \"postgres\"}"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/DatabasePassword/Resource"
+   }
+  },
+  "DatabasePasswordAttachment4378D145": {
+   "Type": "AWS::SecretsManager::SecretTargetAttachment",
+   "Properties": {
+    "SecretId": {
+     "Ref": "DatabasePassword49A8070F"
+    },
+    "TargetId": {
+     "Ref": "SongDatabase760C12FF"
+    },
+    "TargetType": "AWS::RDS::DBInstance"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/DatabasePassword/Attachment/Resource"
+   }
+  },
+  "SongDatabaseSubnetGroupEB36AA00": {
+   "Type": "AWS::RDS::DBSubnetGroup",
+   "Properties": {
+    "DBSubnetGroupDescription": "Subnet group for SongDatabase database",
+    "SubnetIds": [
+     {
+      "Ref": "SongDatabaseVPCPublicSubnet1SubnetF2737E3C"
+     },
+     {
+      "Ref": "SongDatabaseVPCPublicSubnet2Subnet7AF432F5"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabase/SubnetGroup/Default"
+   }
+  },
+  "SongDatabase760C12FF": {
+   "Type": "AWS::RDS::DBInstance",
+   "Properties": {
+    "AllocatedStorage": "100",
+    "CopyTagsToSnapshot": true,
+    "DBInstanceClass": "db.t3.micro",
+    "DBName": "songs",
+    "DBSubnetGroupName": {
+     "Ref": "SongDatabaseSubnetGroupEB36AA00"
+    },
+    "DeletionProtection": false,
+    "Engine": "postgres",
+    "EngineVersion": "15",
+    "MasterUserPassword": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "DatabasePassword49A8070F"
+       },
+       ":SecretString:password::}}"
+      ]
+     ]
+    },
+    "MasterUsername": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "DatabasePassword49A8070F"
+       },
+       ":SecretString:username::}}"
+      ]
+     ]
+    },
+    "PubliclyAccessible": true,
+    "StorageType": "gp2",
+    "VPCSecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "DatabaseSecurityGroup7319C0F6",
+       "GroupId"
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/SongDatabase/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2WQQW+CQBCFf4v3ddvixavVxnBpCRivzTBOdRV2yc5sCSH89wawYNrTe/PNy+RlIv2yXunnBdS8xNNtWZhct5kA3hTU/NkSRro9Vqi2X/aYbFUS8sJgFnJL0rPZpS4IHSAvaOYz2zA7NCDG2Sncm7c46eUdZA9CNTQq8eYbhObDsRXylqbA2OQ+bUQALyVZURlh8EaavXehGjo8gk4xoSfhEiycyes2G+Z7sHejHMCfSR7uToG/m075E+t2BwI5MMWWBSySGqtPNXav/8BvtOtUSuyCx+EZH0GqIJ1KGrk4+7TSax0trmzM0gcrpiSdjvoDIwpNhLYBAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "SongDatabaseStack/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "DatabaseEndpoint": {
+   "Description": "The endpoint of the database",
+   "Value": {
+    "Fn::GetAtt": [
+     "SongDatabase760C12FF",
+     "Endpoint.Address"
+    ]
+   },
+   "Export": {
+    "Name": "DatabaseEndpoint"
+   }
+  },
+  "DatabasePort": {
+   "Description": "The port of the database",
+   "Value": {
+    "Fn::GetAtt": [
+     "SongDatabase760C12FF",
+     "Endpoint.Port"
+    ]
+   },
+   "Export": {
+    "Name": "DatabasePort"
+   }
+  },
+  "DatabaseName": {
+   "Description": "The name of the database",
+   "Value": "songs",
+   "Export": {
+    "Name": "DatabaseName"
+   }
+  },
+  "DatabaseUsername": {
+   "Description": "The username for the database",
+   "Value": "postgres",
+   "Export": {
+    "Name": "DatabaseUsername"
+   }
+  },
+  "DatabasePasswordSecret": {
+   "Description": "The name of the secret containing the database password",
+   "Value": {
+    "Fn::Join": [
+     "-",
+     [
+      {
+       "Fn::Select": [
+        0,
+        {
+         "Fn::Split": [
+          "-",
+          {
+           "Fn::Select": [
+            6,
+            {
+             "Fn::Split": [
+              ":",
+              {
+               "Ref": "DatabasePassword49A8070F"
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "Fn::Select": [
+        1,
+        {
+         "Fn::Split": [
+          "-",
+          {
+           "Fn::Select": [
+            6,
+            {
+             "Fn::Split": [
+              ":",
+              {
+               "Ref": "DatabasePassword49A8070F"
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    ]
+   },
+   "Export": {
+    "Name": "DatabasePasswordSecret"
+   }
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-3"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-4"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "us-west-2"
+     ]
+    }
+   ]
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

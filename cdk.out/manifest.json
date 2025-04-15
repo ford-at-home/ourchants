@@ -1,0 +1,269 @@
+{
+  "version": "40.0.0",
+  "artifacts": {
+    "SongDatabaseStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "SongDatabaseStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "SongDatabaseStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "SongDatabaseStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/98f1a42941e51484de83d7a253c5e3647df87da9cd3deea9e7324463c2c0f753.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "SongDatabaseStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "SongDatabaseStack.assets"
+      ],
+      "metadata": {
+        "/SongDatabaseStack/SongDatabaseVPC/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCA08D5546"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPublicSubnet1SubnetF2737E3C"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPublicSubnet1RouteTableBA78C708"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPublicSubnet1RouteTableAssociationF0723ED8"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPublicSubnet1DefaultRoute5B4ECA61"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPublicSubnet1EIPCA9DD28D"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPublicSubnet1NATGateway8B38A0EC"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPublicSubnet2Subnet7AF432F5"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPublicSubnet2RouteTable24C0782F"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPublicSubnet2RouteTableAssociation7B718A2B"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPublicSubnet2DefaultRoute1E7C4093"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPublicSubnet2EIPF62A2BDC"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPublicSubnet2NATGateway826B9FE6"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPrivateSubnet1SubnetA70560B1"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPrivateSubnet1RouteTableCDEF84D6"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPrivateSubnet1RouteTableAssociationD2DA70CE"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPrivateSubnet1DefaultRoute0F269240"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPrivateSubnet2SubnetE9127863"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPrivateSubnet2RouteTableA79F662A"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPrivateSubnet2RouteTableAssociationC12A8764"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCPrivateSubnet2DefaultRoute3CAC5805"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCIGW2263AC93"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabaseVPC/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseVPCVPCGW177641E4"
+          }
+        ],
+        "/SongDatabaseStack/DatabaseSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DatabaseSecurityGroup7319C0F6"
+          }
+        ],
+        "/SongDatabaseStack/DatabasePassword/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DatabasePassword49A8070F"
+          }
+        ],
+        "/SongDatabaseStack/DatabasePassword/Attachment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DatabasePasswordAttachment4378D145"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabase/SubnetGroup/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabaseSubnetGroupEB36AA00"
+          }
+        ],
+        "/SongDatabaseStack/SongDatabase/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SongDatabase760C12FF"
+          }
+        ],
+        "/SongDatabaseStack/DatabaseEndpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DatabaseEndpoint"
+          }
+        ],
+        "/SongDatabaseStack/DatabasePort": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DatabasePort"
+          }
+        ],
+        "/SongDatabaseStack/DatabaseName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DatabaseName"
+          }
+        ],
+        "/SongDatabaseStack/DatabaseUsername": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DatabaseUsername"
+          }
+        ],
+        "/SongDatabaseStack/DatabasePasswordSecret": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DatabasePasswordSecret"
+          }
+        ],
+        "/SongDatabaseStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/SongDatabaseStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/SongDatabaseStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/SongDatabaseStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "SongDatabaseStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

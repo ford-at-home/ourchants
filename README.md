@@ -106,11 +106,23 @@ The data model includes the following validation rules:
 4. Push to the branch
 5. Create a new Pull Request
 
-## Cursor Prompt
-The few-shot prompt that generated this code was:
+## Cursor Prompts
+The zero-shot prompts that generated this code were:
+1. 
 ```
 Create a Python data model for an application where users can store and interact with song data. The model should include fields like id, name, artist, album, release_date, genre, and duration_in_seconds. The data model should be structured using Python classes, and make sure to use dataclasses for simplicity. Include a test that creates an instance of the data model and checks if it can be initialized properly with sample data.
 ```
+Validation: `pytest -m tests/*.py`
+2. 
+```
+Generate a fake JSON file containing sample song data. Use the following fields from the song data model: id, name, artist, album, release_date, genre, and duration_in_seconds. The file should contain 10 entries with realistic but fake data. Write a test that verifies the JSON file is properly formatted and the data is accessible from the file.
+```
+Validation: `pytest -m tests/*.py`
+3. 
+```
+Design a PostgreSQL database schema for the song data model that supports the following fields: id, name, artist, album, release_date, genre, and duration_in_seconds. The database should be optimized for querying song information efficiently. Include a Python CDK script that deploys the database and Python script that loads the fake data/sample_songs.json data into the AWS table after it is deployed. Include a test that checks to make sure the database was created and has the sample data available.
+```
+Validation: `cdk bootstrap && cdk deploy`
 
 ## License
 

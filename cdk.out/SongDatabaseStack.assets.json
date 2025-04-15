@@ -1,0 +1,19 @@
+{
+  "version": "40.0.0",
+  "files": {
+    "98f1a42941e51484de83d7a253c5e3647df87da9cd3deea9e7324463c2c0f753": {
+      "source": {
+        "path": "SongDatabaseStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "98f1a42941e51484de83d7a253c5e3647df87da9cd3deea9e7324463c2c0f753.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
