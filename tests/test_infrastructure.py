@@ -67,37 +67,40 @@ def test_resource_accessibility():
     # Test RDS accessibility
     try:
         rds_client.describe_db_instances(DBInstanceIdentifier="ourchants-database")
-        assert True
+    except rds_client.exceptions.DBInstanceNotFound:
+        pytest.fail("RDS instance not found")
     except Exception as e:
-        pytest.fail(f"RDS instance not accessible: {str(e)}")
+        pytest.fail(f"Error accessing RDS: {str(e)}")
 
     # Test Lambda accessibility
     try:
         lambda_client.get_function(FunctionName="OurChantsAPIFunction")
-        assert True
+    except lambda_client.exceptions.ResourceNotFoundException:
+        pytest.fail("Lambda function not found")
     except Exception as e:
-        pytest.fail(f"Lambda function not accessible: {str(e)}")
+        pytest.fail(f"Error accessing Lambda: {str(e)}")
 
     # Test API Gateway accessibility
     try:
         apis = apigateway_client.get_rest_apis()
-        assert any(api['name'] == 'OurChants API' for api in apis['items'])
+        assert any(api['name'] == 'OurChants API' for api in apis['items']), "API Gateway not found"
     except Exception as e:
-        pytest.fail(f"API Gateway not accessible: {str(e)}")
+        pytest.fail(f"Error accessing API Gateway: {str(e)}")
 
     # Test S3 bucket accessibility
     try:
         buckets = s3_client.list_buckets()
-        assert any(bucket['Name'].startswith('ourchants-assets') for bucket in buckets['Buckets'])
+        assert any(bucket['Name'].startswith('ourchants-assets') for bucket in buckets['Buckets']), "S3 bucket not found"
     except Exception as e:
-        pytest.fail(f"S3 bucket not accessible: {str(e)}")
+        pytest.fail(f"Error accessing S3: {str(e)}")
 
     # Test Parameter Store accessibility
     try:
         ssm_client.get_parameter(Name="/ourchants/database/secret")
-        assert True
+    except ssm_client.exceptions.ParameterNotFound:
+        pytest.fail("Parameter Store entry not found")
     except Exception as e:
-        pytest.fail(f"Parameter Store entry not accessible: {str(e)}")
+        pytest.fail(f"Error accessing Parameter Store: {str(e)}")
 
 @pytest.mark.skip(reason="Requires deployed stack")
 def test_api_endpoints():
@@ -116,7 +119,7 @@ def test_api_endpoints():
             httpMethod='GET',
             pathWithQueryString='/songs'
         )
-        assert response['status'] == 200
+        assert response['status'] == 200, f"GET /songs returned status {response['status']}"
     except Exception as e:
         pytest.fail(f"GET /songs endpoint not working: {str(e)}")
 
@@ -137,6 +140,38 @@ def test_api_endpoints():
                 'duration_in_seconds': 180
             })
         )
-        assert response['status'] == 201
+        assert response['status'] == 201, f"POST /songs returned status {response['status']}"
     except Exception as e:
-        pytest.fail(f"POST /songs endpoint not working: {str(e)}") 
+        pytest.fail(f"POST /songs endpoint not working: {str(e)}")
+
+    # Test PUT /songs/{id} endpoint
+    try:
+        response = apigateway_client.test_invoke_method(
+            restApiId=api_id,
+            resourceId='songs/{song_id}',
+            httpMethod='PUT',
+            pathWithQueryString='/songs/test-song',
+            body=json.dumps({
+                'name': 'Updated Test Song',
+                'artist': 'Updated Test Artist',
+                'album': 'Updated Test Album',
+                'release_date': '2023-01-02',
+                'genre': 'Updated Test',
+                'duration_in_seconds': 200
+            })
+        )
+        assert response['status'] == 200, f"PUT /songs/{{id}} returned status {response['status']}"
+    except Exception as e:
+        pytest.fail(f"PUT /songs/{{id}} endpoint not working: {str(e)}")
+
+    # Test DELETE /songs/{id} endpoint
+    try:
+        response = apigateway_client.test_invoke_method(
+            restApiId=api_id,
+            resourceId='songs/{song_id}',
+            httpMethod='DELETE',
+            pathWithQueryString='/songs/test-song'
+        )
+        assert response['status'] == 204, f"DELETE /songs/{{id}} returned status {response['status']}"
+    except Exception as e:
+        pytest.fail(f"DELETE /songs/{{id}} endpoint not working: {str(e)}") 
